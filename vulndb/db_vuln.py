@@ -184,7 +184,7 @@ class DBVuln(object):
             raise NotFoundException('$ref points to a non existing file')
 
         with open(file_path) as db_file:
-            return file_path.read()
+            return db_file.read()
 
     @staticmethod
     def load_from_json(db_file, language=DEFAULT_LANG):
