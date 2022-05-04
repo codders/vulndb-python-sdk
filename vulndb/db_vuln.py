@@ -183,7 +183,8 @@ class DBVuln(object):
         if not os.path.exists(file_path):
             raise NotFoundException('$ref points to a non existing file')
 
-        return open(file_path).read()
+        with open(file_path) as db_file:
+            return file_path.read()
 
     @staticmethod
     def load_from_json(db_file, language=DEFAULT_LANG):
@@ -199,7 +200,8 @@ class DBVuln(object):
         # There are a couple of things I don't do here, and are on purpose:
         #   - I want to fail if the file doesn't exist
         #   - I want to fail if the file doesn't contain valid JSON
-        raw = json.loads(open(db_file).read())
+        with open(db_file) as database:
+            raw = json.loads(database.read())
 
         # Here I don't do any error handling either, I expect the JSON files to
         # be valid
